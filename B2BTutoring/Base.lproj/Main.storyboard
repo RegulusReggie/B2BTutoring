@@ -902,7 +902,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="saveProfile:" destination="z4n-Z3-pce" eventType="touchUpInside" id="Dey-OT-G7M"/>
-                                            <segue destination="WnA-Ve-DhA" kind="show" identifier="Show Homepage" id="Cnt-Pv-cDd"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -956,6 +955,7 @@
                         <outlet property="photoButton" destination="C5Z-Jl-xAX" id="J1r-HP-ZMO"/>
                         <outlet property="slidingView" destination="MsO-so-bjH" id="tNY-U4-fHx"/>
                         <outlet property="topConstraint" destination="aeV-q5-5Tx" id="bL9-FU-eS0"/>
+                        <segue destination="WnA-Ve-DhA" kind="show" identifier="showTabBarControllerSegue" id="YXf-co-zrl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NKL-XM-kRb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -986,7 +986,7 @@
         <scene sceneID="N4V-jx-tnR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pGh-xw-IJ1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" image="search" id="D58-vo-5Jo"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="search" selectedImage="Search" id="D58-vo-5Jo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="M0j-Wh-DWs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1012,7 +1012,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Bap-Mm-8gb">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bap-Mm-8gb" id="60a-OB-KuU">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1035,7 +1035,7 @@
         <scene sceneID="p27-jq-3L3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LgP-As-P9g" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Explore" image="explore" id="HcA-d1-XtR"/>
+                    <tabBarItem key="tabBarItem" title="Explore" image="Explore" selectedImage="Explore" id="HcA-d1-XtR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z7B-Xu-Ten">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1061,7 +1061,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="cof-V1-5Cp">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cof-V1-5Cp" id="q1Z-qj-pyD">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1192,7 +1192,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SessionTableViewCell" rowHeight="120" id="Gvl-hR-4Wl" customClass="SessionTableViewCell" customModule="B2BTutoring" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="120"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gvl-hR-4Wl" id="ViH-Zy-v8Q">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="119"/>
@@ -1392,6 +1392,9 @@
                                 <segment title="Tutor"/>
                             </segments>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="indexChanged:" destination="PWV-Az-HWn" eventType="valueChanged" id="Fru-hd-6o7"/>
+                            </connections>
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" image="add_session" id="EIO-8l-OBd">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1400,6 +1403,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tutorSegment" destination="hyh-87-Hdn" id="Az7-yr-9Nw"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zWr-v3-59N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1713,10 +1719,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Explore" width="25" height="25"/>
+        <image name="Search" width="25" height="25"/>
         <image name="add_session" width="25" height="25"/>
         <image name="darth_vader" width="628" height="628"/>
         <image name="edit" width="25" height="25"/>
-        <image name="explore" width="25" height="25"/>
         <image name="profile" width="25" height="25"/>
         <image name="search" width="25" height="25"/>
         <image name="sessions" width="25" height="25"/>

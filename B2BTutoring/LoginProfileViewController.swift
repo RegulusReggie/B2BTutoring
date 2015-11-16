@@ -41,6 +41,9 @@ class LoginProfileViewController: UIViewController, UITextFieldDelegate, UIAlert
     var photo: UIImage!
     
     @IBAction func saveProfile(sender: UIButton) {
+        let alert = UIAlertController(title: "Alert", message: "Signing Up...", preferredStyle: UIAlertControllerStyle.Alert)
+        self.presentViewController(alert, animated: true, completion: nil)
+        
         let user = User()
         user.username = "myPhoneNumber"
         user.password = "myPassword"
@@ -55,7 +58,6 @@ class LoginProfileViewController: UIViewController, UITextFieldDelegate, UIAlert
         query.findObjectsInBackgroundWithBlock {
             (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
-                print("Success on retrieving \(objects!.count)")
                 if let objects = objects as [PFObject]! {
                     for object in objects {
                         if let object = object as? Session {
@@ -64,23 +66,12 @@ class LoginProfileViewController: UIViewController, UITextFieldDelegate, UIAlert
                     }
                 }
                 
-                let currentSessions = user.getOngoingTutorSessions()
-                for session in currentSessions {
-                    print(session.tutor + " " + session.tutee)
-                }
-                
                 user.signUpInBackgroundWithBlock {
                     (succeeded: Bool, error: NSError?) -> Void in
                     if succeeded {
-                        print("succeeded")
-                        let currentUser = User.currentUser()
-                        if (currentUser != nil) {
-                            print(currentUser!.intro)
-                        } else {
-                            print("current user is nil")
-                        }
+                        self.performSegueWithIdentifier("showTabBarControllerSegue", sender: self)
                     } else {
-                        print("error")
+                        print("Error: \(error!)")
                     }
                 }
             } else {

@@ -36,13 +36,10 @@ class Session : PFObject, PFSubclassing {
  // @NSManaged public var icon: PFFile!
     
     func expired() -> Bool{
-        let current_date = NSDate()
-        var isGreater = false
         
-        if (self.ends.compare(current_date)==NSComparisonResult.OrderedAscending)
-        {
-            isGreater = true
+        if self.starts.compare(NSDate()) == NSComparisonResult.OrderedAscending {
+            return true
         }
-        return isGreater
+        return false
     }
 }

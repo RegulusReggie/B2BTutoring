@@ -200,6 +200,19 @@ class CreateSessionViewController: FormViewController {
             session.saveInBackgroundWithBlock {
                 (success: Bool, error: NSError?) -> Void in
                     if (success) {
+                        if let currentUser = User.currentUser() {
+                            User.objectWithoutDataWithObjectId(currentUser.objectId).fetchInBackgroundWithBlock {
+                                (object: PFObject?, error: NSError?) -> Void in
+                                if error == nil {
+                                    if let user = object as? User {
+                                        user.tutorSessions?.append(session)
+                                    }
+                                } else {
+                                    print("Error retrieving user sessions")
+                                }
+                            }
+                        }
+
                         self.createAlert("Successfully created session!", unwind: true)
                     } else {
                         self.createAlert("Unable to create session due to server error.", unwind: true)
